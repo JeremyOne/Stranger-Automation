@@ -1,3 +1,5 @@
+int ledState = LOW;
+
 void toggleLed(){
   if (ledState == LOW){
     ledState = HIGH;

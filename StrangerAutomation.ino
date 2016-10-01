@@ -8,22 +8,21 @@ RCSwitch receiveSwitch = RCSwitch();
 RCSwitch sendSwitch = RCSwitch();
 ESP8266WebServer server(80);
 
-//Codes to turn on the devices
-int onCodes[] = {4281651, 4281795, 4282115, 4283651, 4289795};
+int onCodes[] = {4281651, 4281795, 4282115, 4283651, 4289795};  //Codes to turn on the devices
+int offCodes[] = {4281660, 4281804, 4282124, 4283660, 4289804}; //Codes to turn OFF the devices
+bool deviceState[] = {0, 0, 0, 0, 0};                           //current state of devices, default to off
+int deviceCount = 4;                                            //number of deives (zero index)
 
-//Codes to turn OFF the devices
-int offCodes[] = {4281660, 4281804, 4282124, 4283660, 4289804};
+long unsigned int receivePin = D0;
+long unsigned int transmitPin = D8;
+int pulseLength = 185;
+int codeBitLength = 24;                                         //bits length of 433 codes 
 
-//current state of devices, default to off
-bool deviceState[] = {0, 0, 0, 0, 0};
-
-int ledState = LOW;       //current diag led state
-int deviceCount = 4;      //number of deives (zero index)
-int nextPulse = 0;        //next millis of action
-int nextCodeIndex = 0;  
+//int nextPulse = 0;                                            //next millis of action
+//int nextCodeIndex = 0;  
 int defaultRetrySend = 3;
 int flickerRetrySend = 2;
-int codeBitLength = 24;   //bits length of 433 codes 
+
 bool debugRadio = false;  //enable radio receive debug
 
 //using constant PROGMEM to save memory with this long html string, minified with: http://www.willpeavy.com/minifier/ from Default.html

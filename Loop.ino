@@ -12,11 +12,11 @@ void setup() {
   WiFi.printDiag(Serial);
 
   if(debugRadio){
-    receiveSwitch.enableReceive(D2);
+    receiveSwitch.enableReceive(receivePin);
   }
   
-  sendSwitch.enableTransmit(D1);
-  sendSwitch.setPulseLength(185);
+  sendSwitch.enableTransmit(transmitPin);
+  sendSwitch.setPulseLength(pulseLength);
   //sendSwitch.setProtocol(1); //causes errors?
   sendSwitch.setRepeatTransmit(defaultRetrySend);
 
