@@ -16,19 +16,32 @@ Gnd - Connect to any Gnd on the ESP
 Data - Connect to any digital pin - I used D8
 VCC - Cnnect to VIN on ESP
 
-In StrangerAutomation.ino, set DebugRadio = 1;
+In StrangerAutomation.ino, set:
+
+```
+bool DebugRadio = 1;
+long unsiged int receivePin = D8; //Or another chosen pin, some pins may work better than others
+```
 
 Upload the sketch to your ESP and start the serial monitor. 
 
 Note: The wiFi manger script will attempt to connect your wifi each time you power on, you can use the web manger to connect now or later.
 
-Once the seral monitor is running you can attempt to read the codes out of the air, use the remote that came with your outlets and toggle the aviable buttons. As codes are received they will immediately output to the seral monitor, note which turn your outlets on and off.
+Once the seral monitor is running you can attempt to read the codes out of the air, use the remote that came with your outlets and toggle the aviable buttons. As codes are received they will immediately output to the seral monitor, if no codes appear check your wiring.
 
 ## Code Discovery
-To discover the on/off codes required to run your outlets, wire the 433mhz receiver to the ESP8266, and 
+Once your receiver is working discover each on and off code for your outlets, the bit length and pulse length. 
 
 
-Add discoverd codes to onCodes and offCodes arrays in StrangerAuotmation.ino
+Adjust the following in StrangerAuotmation.ino as needed:
+```
+int onCodes[] = {0000000, 2222222, 4444444, 6666666, 8888888};  //Codes to turn on the devices
+int offCodes[] = {1111111, 3333333, 5555555, 7777777, 9999999}; //Codes to turn OFF the devices
+int deviceCount = 4;                                            //number of devices (zero index)
+int pulseLength = 185;
+int codeBitLength = 24;
+```
+
 
 ## Transmit Setup
 Soon
