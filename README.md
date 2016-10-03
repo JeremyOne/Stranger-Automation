@@ -1,6 +1,8 @@
 # Stranger-Automation
 A small project for automating a series of 433mhz mains automation plugs in the style of Stranger Things christmas lights
 
+See an example of the lights running here: [YouTube - Stranger Automation](https://www.youtube.com/watch?v=LgupRClw0yk)
+
 ## Required Equipment
 1x esp8266 microcontroller, any variation supported by [ESP8266-Arduino](https://github.com/esp8266/Arduino/), and any cables needed for flashing/programming
 
