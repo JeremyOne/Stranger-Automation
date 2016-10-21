@@ -83,24 +83,25 @@ The web interface is a mobile friendly bootstrap interface that makes AJAX/REST 
 ###/toggle
 Toggles all outlets on, then off.
 
-Optional parameters:
+####Optional parameters:
 id - control one device only
 
 ###/flicker
 randomly choose outlets to switch on or off as quickly as possible
 
-Optional parameters:
+####Optional parameters:
 id - control one device only
+
 number - number of times to flicker (default 50)
 
 ###/on
 Turns all outlets ON
 
-Optional parameters:
+####Optional parameters:
 id - control one device only
 
 ###/off
 Turns all outlets OFF
 
-Optional parameters:
+####Optional parameters:
 id - control one device only
