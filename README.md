@@ -12,6 +12,8 @@ See an example of the lights running here: [YouTube - Stranger Automation](https
 
 Any number of 433mhz wireless remote control outlets, I used these: [Amazon - Etekcity](https://www.amazon.com/-/dp/B00DQELHBS)
 
+![](Docs/circut-finished-top.jpg?raw=true | width=100)
+
 ## Receive Setup
 The 433hmz receiver has three simple connections:
 Gnd - Connect to any Gnd on the ESP
@@ -74,4 +76,31 @@ This project uses the WiFiManger library from, tzapu. If no wifi config exists i
 For more info see: [WiFiManager](https://github.com/tzapu/WiFiManager)
 
 ##Web Interface
-Soon
+The web interface is a mobile friendly bootstrap interface that makes AJAX/REST style requests to the host ESP web server. [screenshot](https://github.com/JeremyOne/Stranger-Automation/blob/master/Docs/web-screenshot.jpg)
+
+##REST API
+
+###/toggle
+Toggles all outlets on, then off.
+
+Optional parameters:
+id - control one device only
+
+###/flicker
+randomly choose outlets to switch on or off as quickly as possible
+
+Optional parameters:
+id - control one device only
+number - number of times to flicker (default 50)
+
+###/on
+Turns all outlets ON
+
+Optional parameters:
+id - control one device only
+
+###/off
+Turns all outlets OFF
+
+Optional parameters:
+id - control one device only
