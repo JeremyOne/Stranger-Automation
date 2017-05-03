@@ -1,3 +1,5 @@
+//All functions related to handling http requests
+
 void handleOn(){
   if(server.hasArg("id")){
     int id = server.arg("id").toInt();

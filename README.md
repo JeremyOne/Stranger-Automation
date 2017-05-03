@@ -4,7 +4,7 @@ A small project for automating a series of 433mhz mains automation plugs in the 
 See an example of the lights running here: [YouTube - Stranger Automation](https://www.youtube.com/watch?v=LgupRClw0yk)
 
 ## Required Equipment
-1x esp8266 microcontroller, any variation supported by [ESP8266-Arduino](https://github.com/esp8266/Arduino/), and any cables needed for flashing/programming
+1x esp8266 microcontroller, any version supported by [ESP8266-Arduino](https://github.com/esp8266/Arduino/), and any cables needed for flashing/programming, and 2 free pins.
 
 1x 433mhz receiver - generic, any version that can work with 3.3v logic [Sparkfun](https://www.sparkfun.com/products/10532), similar can be found on Amazon and ebay
 
@@ -12,15 +12,15 @@ See an example of the lights running here: [YouTube - Stranger Automation](https
 
 Any number of 433mhz wireless remote control outlets, I used these: [Amazon - Etekcity](https://www.amazon.com/-/dp/B00DQELHBS)
 
-![](Docs/circut-finished-top.jpg?raw=true | width=100)
-
-## Receive Setup
-The 433hmz receiver has three simple connections:
+## Receiver Setup
+The 433hmz receiver has three connections:
 Gnd - Connect to any Gnd on the ESP
-Data - Connect to any digital pin - I used D8
+Data - Connect to any digital pin, D8 works well
 VCC - Connect to VIN on ESP
 
-Note: Technically all digital pins on the ESP are 3.3v, but when the receiver is connected to VIN it would be running and outputting logic at 5v. Many report no problems with this, and in my case is was also not and issue, but your millage may vary.
+Note: All digital pins on the ESP are 3.3v, but if the receiver's VCC is connected to 5v it will run and out logic at 5v. Many report no problems with this, and in my case it was not and issue, but your millage may vary.
+
+[Finished Circut](https://github.com/JeremyOne/Stranger-Automation/blob/master/Docs/circut-finished-top.jpg?raw=true | width=100)
 
 In StrangerAutomation.ino, set:
 
@@ -31,14 +31,14 @@ long unsigned int receivePin = D8; //Or another chosen pin, some pins may work b
 
 Upload the sketch to your ESP and start the serial monitor.
 
-Note: The wiFi manger script will attempt to connect your wifi each time you power on, you can use the web manger to connect now or later.
+Note: The WiFi manger script will attempt to connect your wifi each time you power on, you can use the web manger to connect now or later.
 
 Your setup may or may not require an antennas to send and receive reliably. For me, a simple solid core wire cut to 17CM and soldered to the TX and RX units worked great.
 
-Once the seral monitor is running you can attempt to read the codes out of the air, use the remote that came with your outlets and toggle the available buttons. As codes are received they will immediately output to the seral monitor, if no codes appear check your wiring.
+Once the serial monitor is running you can attempt to read the codes out of the air, use the remote that came with your outlets and toggle the available buttons. As codes are received they will immediately output to the serial monitor, if no codes appear check your wiring.
 
 ## Code Discovery
-Once your receiver is working, use the seral monitor to discover the on and off code for each outlet. Also note the bit and pulse lengths.
+Once your receiver is working, use the serial monitor to discover the on and off code for each outlet. Also note the bit and pulse lengths.
 
 Adjust the following lines in StrangerAuotmation.ino:
 ```
@@ -51,7 +51,7 @@ int codeBitLength = 24;                                         //Number of tota
 
 Note: The system is not limited to 5 devices, you can have any number that work on the same pulse and bit length.
 
-## Transmit Setup
+## Transmiter Setup
 The 433hmz transmitter also has three connections:
 Gnd - Connect to any Gnd on the ESP
 Data - Connect to any digital pin - I used D0
@@ -70,38 +70,39 @@ If your transmissions are not working at all, double check your wiring and your 
 
 Both TX and RX use the rc-switch library by sui77, for more info see [rc-switch](https://github.com/sui77/rc-switch).
 
-##WiFi Setup
+## WiFi Setup
 This project uses the WiFiManger library from, tzapu. If no wifi config exists in flash, it will create a WiFi network that provides a web interface to select and enter your SSID and key phrase.
 
 For more info see: [WiFiManager](https://github.com/tzapu/WiFiManager)
 
-##Web Interface
-The web interface is a mobile friendly bootstrap interface that makes AJAX/REST style requests to the host ESP web server. [screenshot](https://github.com/JeremyOne/Stranger-Automation/blob/master/Docs/web-screenshot.jpg)
+## Web Interface
+The web interface is a mobile friendly bootstrap interface that makes AJAX/REST style requests to the host ESP web server.
+[Interface Screenshot](https://github.com/JeremyOne/Stranger-Automation/blob/master/Docs/web-screenshot.jpg)
 
-##REST API
+## REST API
 
-###/toggle
+### /toggle
 Toggles all outlets on, then off.
 
-####Optional parameters:
+#### Optional parameters:
 id - control one device only
 
-###/flicker
+### /flicker
 randomly choose outlets to switch on or off as quickly as possible
 
-####Optional parameters:
+#### Optional parameters:
 id - control one device only
 
 number - number of times to flicker (default 50)
 
-###/on
+### /on
 Turns all outlets ON
 
-####Optional parameters:
+#### Optional parameters:
 id - control one device only
 
-###/off
+### /off
 Turns all outlets OFF
 
-####Optional parameters:
+#### Optional parameters:
 id - control one device only

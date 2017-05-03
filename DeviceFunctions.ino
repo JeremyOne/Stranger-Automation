@@ -1,3 +1,6 @@
+//All functions that actually do things on the device
+
+
 RCSwitch receiveSwitch = RCSwitch();
 RCSwitch sendSwitch = RCSwitch();
 ESP8266WebServer server(80);

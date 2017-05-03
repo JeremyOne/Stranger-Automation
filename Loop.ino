@@ -1,3 +1,5 @@
+//Setup the app and run the loop
+
 void setup() {
   Serial.begin(115200);
   Serial.println(".");
@@ -5,8 +7,6 @@ void setup() {
   pinMode(BUILTIN_LED, OUTPUT);
 
   WiFiManager wifiManager;
-  //wifiManager.resetSettings();
-  //wifiManager.setTimeout(30);
   wifiManager.autoConnect();
 
   WiFi.printDiag(Serial);
